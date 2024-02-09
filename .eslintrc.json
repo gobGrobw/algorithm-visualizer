@@ -1,0 +1,32 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"es2021": true
+	},
+	"extends": ["airbnb-base", "prettier"],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"no-console": "off",
+		"no-bitwise": "off",
+		"no-plusplus": ["off", { "allowForLoopAfterthoughts": true }],
+		"prefer-destructuring": "off",
+		"no-restricted-syntax": "off",
+		"class-methods-use-this": "off",
+		"no-else-return": "off",
+		"import/no-extraneous-dependencies": [
+			"off",
+			{ "devDependencies": false, "optionalDependencies": false, "peerDependencies": false }
+		]
+	},
+	"overrides": [
+		{
+			"files": ["./src/test/*"],
+			"env": {
+				"jest": true
+			}
+		}
+	]
+}

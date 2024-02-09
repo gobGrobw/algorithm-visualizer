@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Algorithm Visualizer</title>
+	</head>
+	<body>
+		<nav>
+			<h2>&lt; // AlgoLizer &gt;</h2>
+		</nav>
+
+		<header>
+			<h2>Sorting Algorithm</h2>
+			<h1>Visualizer</h1>
+		</header>
+
+		<main>
+			<div id="option-container">
+				<label for="algorithm-option">Choose Algorithm</label>
+				<select name="algorithm-option" id="algorithm-option">
+					<option value="bubble-sort">Bubble Sort</option>
+					<option value="quick-sort">Quick Sort</option>
+				</select>
+
+				<button id="randomize-data-btn">Randomize Data</button>
+			</div>
+
+			<div id="visualizer-container"></div>
+			<button id="visualize-btn">Visualize!</button>
+		</main>
+		<footer>
+			Made by&nbsp;<a target="_blank" href="https://github.com/gobGrobw">Gob</a>&nbsp;with
+			love
+		</footer>
+
+		<script src="main.js"></script>
+	</body>
+</html>
