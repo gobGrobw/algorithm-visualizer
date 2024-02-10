@@ -56,7 +56,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 6vh;
+	margin-top: 5vh;
 }
 
 #option-container {
@@ -75,13 +75,6 @@ main {
 	padding: 5px;
 }
 
-#visualizer-container {
-	margin-top: 3vh;
-	border: 2px solid black;
-	width: 760px;
-	height: 300px;
-}
-
 #randomize-data-btn {
 	padding: 2px 4px 2px 4px;
 	background-color: var(--darkish-grey);
@@ -90,18 +83,21 @@ main {
 	border-radius: 5px;
 	cursor: pointer;
 	transition: ease-in-out 100ms;
+	width: fit-content;
 }
 
 #visualize-btn {
 	margin-top: 2vh;
 	font-size: 1.5rem;
+	font-weight: bold;
 	padding: 10px 20px 10px 20px;
 	background-color: transparent;
-	border: 2px solid var(--yellow-danger);
+	border: 3px solid var(--yellow-danger);
 	color: var(--yellow-danger);
 	border-radius: 5px;
 	cursor: pointer;
 	transition: ease-in-out 100ms;
+	width: fit-content;
 }
 
 #randomize-data-btn:hover,
