@@ -11,10 +11,12 @@ export default function Chart(data) {
 		bottom: 20,
 		left: 20,
 	};
+	const color = {
+		yellowDanger: '#d4af37',
+		darkishGrey: '#222222',
+	};
 
-	// Declaring svg, x and y
-	const svg = d3.select('#visualizer-container').append('svg');
-	svg.attr('width', width).attr('height', height).attr('viewbox', [0, 0, width, height]);
+	// Declaring x and y
 	const x = d3
 		.scaleBand()
 		.domain(d3.range(data.length))
@@ -28,29 +30,47 @@ export default function Chart(data) {
 
 	// Display data into DOM
 	function init() {
-		const rect = svg
-			.append('g')
-			.attr('fill', '#d4af37')
-			.selectAll('rect')
-			.data(data)
-			.join('rect');
-		rect.attr('x', (d, i) => x(i));
-		rect.attr('y', height);
+		const svg = d3.select('#visualizer-container').append('svg');
+		svg.attr('width', width).attr('height', height).attr('viewbox', [0, 0, width, height]);
+
+		const group = svg.selectAll('g').data(data).enter();
+
+		// Adds rectangle to group
+		const rect = group
+			.append('rect')
+			.attr('fill', color.yellowDanger)
+			.attr('x', (d, i) => x(i))
+			.attr('y', height);
 		rect.transition()
 			.duration(transitionTime)
 			.attr('height', (d) => y(0) - y(d))
 			.attr('y', (d) => y(d));
 		rect.attr('width', x.bandwidth());
+
+		// Adds text to group
+		group
+			.append('text')
+			.attr('x', (d, i) => x(i) + x.bandwidth() / 2)
+			.attr('y', height - x.bandwidth() / 2)
+			.attr('fill', color.darkishGrey)
+			.style('stroke-width', 1)
+			.style('font-size', '18px')
+			.style('font-weight', 'bold')
+			.style('text-anchor', 'middle')
+			.text((d) => d);
 	}
 
+	// Updates DOM chart with new data
 	function update(newData) {
+		const svg = d3.select('svg');
 		const rect = svg.selectAll('rect').data(newData).join('rect');
-		rect.attr('x', (d, i) => x(i));
 		rect.transition()
 			.duration(transitionTime)
 			.attr('height', (d) => y(0) - y(d))
-			.attr('y', (d) => y(d))
-			.attr('width', x.bandwidth());
+			.attr('y', (d) => y(d));
+
+		const text = svg.selectAll('text').data(newData).join('text');
+		text.text((d) => d);
 	}
 
 	return {

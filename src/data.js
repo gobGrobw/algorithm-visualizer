@@ -1,4 +1,5 @@
 export default function Data() {
+	// Generates data with length of 10
 	function generate() {
 		const arr = [];
 		for (let i = 1; i <= 10; i++) {
