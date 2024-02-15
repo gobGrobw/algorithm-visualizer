@@ -4,7 +4,7 @@ export default function Chart(data) {
 	// Attribute
 	const width = 760;
 	const height = 380;
-	const transitionTime = 1000;
+	const transitionTime = 600;
 	const margin = {
 		top: 20,
 		right: 20,
@@ -14,6 +14,8 @@ export default function Chart(data) {
 	const color = {
 		yellowDanger: '#d4af37',
 		darkishGrey: '#222222',
+		royalBlue: '#00296B',
+		whiteGray: '#EAEBEB',
 	};
 
 	// Declaring x and y
@@ -38,6 +40,7 @@ export default function Chart(data) {
 		// Adds rectangle to group
 		const rect = group
 			.append('rect')
+			.attr('class', `data-${(d) => d}`)
 			.attr('fill', color.yellowDanger)
 			.attr('x', (d, i) => x(i))
 			.attr('y', height);
@@ -73,8 +76,31 @@ export default function Chart(data) {
 		text.text((d) => d);
 	}
 
+	function swap(datas) {
+		const firstVal = datas.firstVal;
+		const secondVal = datas.secondVal;
+
+		const svg = d3.select('svg');
+		const rect = svg.selectAll('rect').data(datas.swappedArr).join('rect');
+		rect.transition()
+			.duration(transitionTime)
+			.attr('height', (d) => y(0) - y(d))
+			.attr('y', (d) => y(d))
+			.attr('fill', (d) => {
+				if (d === firstVal) return color.whiteGray;
+				if (d === secondVal) return color.whiteGray;
+				else return color.yellowDanger;
+			});
+
+		svg.selectAll('text')
+			.data(datas.swappedArr)
+			.join('text')
+			.text((d) => d);
+	}
+
 	return {
 		init,
 		update,
+		swap,
 	};
 }

@@ -1,7 +1,4 @@
-import Chart from '../chart';
-
-export default function bubbleSort(arr) {
-	const chart = Chart(arr);
+export default function* bubbleSort(arr) {
 	let flag = true;
 	while (flag) {
 		flag = false;
@@ -11,10 +8,13 @@ export default function bubbleSort(arr) {
 				arr[i] = arr[i + 1];
 				arr[i + 1] = temp;
 
+				yield {
+					swappedArr: arr,
+					firstVal: arr[i],
+					secondVal: arr[i + 1],
+				};
 				flag = true;
 			}
 		}
 	}
-
-	chart.update(arr);
 }
